@@ -37,6 +37,9 @@ class Inventory:
                         break
                     except ValueError:
                         print("Invalid Stock Quantity Entered! Try Again.")
+                return
+
+        print("Product not found. Please check the ID and try again.")
 
     def search_product(self):
         found = False
