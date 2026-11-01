@@ -1,6 +1,7 @@
 #parent class
+from abc import ABC, abstractmethod
 
-class Product:
+class Product(ABC):
     def __init__(self, _Product__id, _Product__name, _Product__price, _Product__stock):
         self.__id = _Product__id
         self.__name = _Product__name
@@ -18,10 +19,14 @@ class Product:
         return self.__name
 
     def get_price(self):
-        return self.__price 
+        return self.__price
 
     def get_stock(self):
         return self.__stock
 
     def display_information(self):
-        return f"ID: {self.__id}    | Name: {self.__name}   | Price: ${self.__price}    | Stock: {self.__stock}"
+        return f"ID: {self.__id:<2} | Name: {self.__name:<20} | Price: ${self.__price:<8} | Stock: {self.__stock:<2} | {self.get_fullfillment_info()}"
+
+    @abstractmethod
+    def get_fullfillment_info(self):
+        return ""

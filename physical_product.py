@@ -1,12 +1,20 @@
 from product import Product
+from can_be_shipped import CanBeShipped
 
-class PhysicalProduct(Product):
-    def __init__(self, id, name, price, stock, weight):
-        super().__init__(id, name, price, stock)
-        self.weight = weight
+class PhysicalProduct(Product, CanBeShipped):
+    def __init__(self, _Product__id, _Product__name, _Product__price, _Product__stock, _PhysicalProduct__weight):
+        super().__init__(_Product__id, _Product__name, _Product__price, _Product__stock)
+        self.__weight = _PhysicalProduct__weight
 
     def display_information(self):
-        return f"ID: {self.__id}    | Name: {self.__name}   | Price: ${self.__price}    | Stock: {self.__stock}     | Weight: {self.weight}kg"
+        return f"{super().display_information()} | Weight: {f'{self.__weight}kg':<6} | Shipping Cost: ${self.get_shipping_cost():.2f}"
 
     def get_weight(self):
-        return self.weight
+        return self.__weight
+
+    def get_shipping_cost(self) -> float:
+        shipping_cost_per_kg = 5.0  # Example shipping cost per kg
+        return abs(self.__weight) * shipping_cost_per_kg
+
+    def get_fullfillment_info(self):
+        return "Requires physical shipping."

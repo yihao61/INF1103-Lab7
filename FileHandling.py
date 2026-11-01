@@ -1,6 +1,7 @@
 import json
 import os
-from product import Product
+from physical_product import PhysicalProduct
+from digital_product import DigitalProduct
 
 def save_inventory(inv_list, filepath):
     print("\nSaving inventory.....")
@@ -24,10 +25,18 @@ def load_inventory(filepath):
     # Load the inventory from the file
     with open(filepath, "r", encoding="utf-8") as file:
         print(f"{filepath} found.")
-        full_list = json.load(file)
+        try:
+            full_list = json.load(file)
+        except json.JSONDecodeError:
+            print(f"{filepath} is empty or corrupted. Starting with an empty inventory.")
+            return inv_list
+
 
     for item in full_list:
-        inv_list.append(Product(**item))
+        if item.get("_DigitalProduct__download_size") is not None:
+            inv_list.append(DigitalProduct(**item))
+        else:
+            inv_list.append(PhysicalProduct(**item))
 
     if not inv_list:
         print("Inventory is empty.")

@@ -5,10 +5,18 @@ class Inventory:
     def get_inventory(self):
         return self.__inventory
 
-    def get_all_product_ids(self):
-        all_ids = [product.get_product_id() for product in self.__inventory]
-        return all_ids
+    def check_id_exists(self, product_id):
+        for product in self.__inventory:
+            if product.get_product_id() == product_id:
+                return True
+        return False
 
+    def check_name_exists(self, product_name):
+        for product in self.__inventory:
+            if product.get_name() == product_name:
+                return True
+        return False
+    
     def add_product(self, prod):
         self.__inventory.append(prod)
         print("\nProduct added successfully!")
@@ -29,8 +37,6 @@ class Inventory:
                         break
                     except ValueError:
                         print("Invalid Stock Quantity Entered! Try Again.")
-        
-        
 
     def search_product(self):
         found = False
@@ -40,9 +46,9 @@ class Inventory:
         for prod in self.__inventory:
             if prod.get_product_id() == idinp:
                 print("\nProduct Found!")
-                print("------------------------------------------------")
-                print(f"ID: {prod.get_product_id()}\nName: {prod.get_name()}\nPrice: ${prod.get_price()}\nStock: {prod.get_stock()}")
-                print("------------------------------------------------")
+                print("------------------------------------------------------------------------------------------------------------------------------------------------")
+                print(prod.display_information())
+                print("------------------------------------------------------------------------------------------------------------------------------------------------")
                 found = True
 
         if not found:
@@ -52,10 +58,10 @@ class Inventory:
 
     def display_all(self):
         print("\nCurrent Inventory\n"
-            "------------------------------------------------")
+            "------------------------------------------------------------------------------------------------------------------------------------------------")
         for prod in self.__inventory:
             print(prod.display_information())
-        print("------------------------------------------------")
+        print("------------------------------------------------------------------------------------------------------------------------------------------------")
         return
 
 
