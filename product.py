@@ -25,8 +25,8 @@ class Product(ABC):
         return self.__stock
 
     def display_information(self):
-        return f"ID: {self.__id:<2} | Name: {self.__name:<20} | Price: ${self.__price:<8} | Stock: {self.__stock:<2} | {self.get_fullfillment_info()}"
+        return f"ID: {self.__id:<2} | Name: {self.__name:<20} | Price: ${self.__price:<8} | Stock: {self.__stock:<2} | {self.get_fulfilment_info()}"
 
     @abstractmethod
-    def get_fullfillment_info(self):
+    def get_fulfilment_info(self):
         return ""

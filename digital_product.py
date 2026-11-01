@@ -11,5 +11,5 @@ class DigitalProduct(Product):
     def get_download_size(self):
         return self.__download_size
 
-    def get_fullfillment_info(self):
+    def get_fulfilment_info(self):
         return "Digital product. No shipping required."
